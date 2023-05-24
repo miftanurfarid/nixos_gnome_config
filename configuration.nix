@@ -104,39 +104,7 @@
     description = "Mifta Nur Farid";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [   
-      # browser
-      firefox
-      
-      # document
-      xournalpp
-      
-      # latex
-      texlive.combined.scheme-full
-      texstudio
 
-      # git
-      git
-      github-desktop
-
-      # text editor
-      vim
-      (
-        vscode-with-extensions.override {
-          vscode = vscodium;
-	        vscodeExtensions = with vscode-extensions; [
-	          ms-pyright.pyright
-	          ms-python.python
-            jnoortheen.nix-ide
-          ];
-        }
-      )
-      
-      # communication
-      tdesktop
-
-      # downloader
-      axel
-      wget
     ];
   };
 
@@ -146,11 +114,47 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-    findutils
-    plocate
-    mlocate
+  # browser
+  firefox
+  google-chrome
+  brave
+  
+  # document
+  xournalpp
+  libreoffice
+      
+  # latex
+  texlive.combined.scheme-full
+  texstudio
+
+  # git
+  git
+  github-desktop
+  
+  # text editor
+  vim
+  (
+  vscode-with-extensions.override {
+    vscode = vscodium;
+    vscodeExtensions = with vscode-extensions; [
+      ms-pyright.pyright	          
+      ms-python.python
+      jnoortheen.nix-ide
+      ];
+    }
+  )
+      
+  # communication
+  tdesktop
+
+  # downloader
+  axel
+  wget
+  
+  # base
+  findutils
+  plocate
+  mlocate
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
