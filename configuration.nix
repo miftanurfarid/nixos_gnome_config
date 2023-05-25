@@ -19,11 +19,14 @@
       };
       config = {
         init = {
-          defaultBranch = "main";
+          defaultBranch = "master";
         };
         user = {
           email="miftanurfarid@gmail.com";
           name="miftanurfarid";
+        };
+        core = {
+          filemode = false;
         };
       };
     };
@@ -104,7 +107,88 @@
     description = "Mifta Nur Farid";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [   
+      # browser
+      firefox
+      
+      # document
+      xournalpp
+      
+      # latex
+      texlive.combined.scheme-full
+      texstudio
 
+      # git
+      git
+      github-desktop
+
+      # text editor
+      vim
+      (
+        vscode-with-extensions.override {
+          vscode = vscodium;
+	        vscodeExtensions = with vscode-extensions; [
+	          ms-pyright.pyright
+	          ms-python.python
+            jnoortheen.nix-ide
+          ];
+        }
+      )
+      
+      # communication
+      tdesktop
+
+      # downloader
+      axel
+      wget
+
+      # octave
+      octaveFull
+
+      # media
+      vlc
+
+      # python
+      (
+        python3.withPackages (
+          ps:
+            with ps; [
+              ipykernel
+              ipython
+              ipywidgets
+              jupyter
+              jupyterlab
+              jupyterlab-lsp
+              jupyterlab-pygments
+              kaggle
+              keras
+              matplotlib
+              mkdocs
+              mkdocs-jupyter
+              nltk
+              numpy
+              opencv4
+              pandas
+              pydot
+              python
+              pytorch
+              scikit-learn
+              scipy
+              seaborn
+              spacy
+              spyder
+              spyder-kernels
+              tensorflow
+              tensorflow-metadata
+              tensorflow-probability
+              torch
+              torchvision
+              tqdm
+              virtualenv
+              virtualenvwrapper
+              xgboost
+            ]
+        )
+      )
     ];
   };
 
@@ -114,47 +198,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  # browser
-  firefox
-  google-chrome
-  brave
-  
-  # document
-  xournalpp
-  libreoffice
-      
-  # latex
-  texlive.combined.scheme-full
-  texstudio
-
-  # git
-  git
-  github-desktop
-  
-  # text editor
-  vim
-  (
-  vscode-with-extensions.override {
-    vscode = vscodium;
-    vscodeExtensions = with vscode-extensions; [
-      ms-pyright.pyright	          
-      ms-python.python
-      jnoortheen.nix-ide
-      ];
-    }
-  )
-      
-  # communication
-  tdesktop
-
-  # downloader
-  axel
-  wget
-  
-  # base
-  findutils
-  plocate
-  mlocate
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
+    findutils
+    plocate
+    mlocate
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
