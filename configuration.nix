@@ -10,6 +10,25 @@
       ./hardware-configuration.nix
     ];
 
+  # git configuration
+  programs = {
+    git = {
+      enable = true;
+      lfs = {
+        enable = true;
+      };
+      config = {
+        init = {
+          defaultBranch = "main";
+        };
+        user = {
+          email="miftanurfarid@gmail.com";
+          name="miftanurfarid";
+        };
+      };
+    };
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -85,7 +104,7 @@
     description = "Mifta Nur Farid";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [   
-    
+
     ];
   };
 
@@ -97,90 +116,45 @@
   environment.systemPackages = with pkgs; [
   # browser
   firefox
-      
+  google-chrome
+  brave
+  
   # document
   xournalpp
   libreoffice
       
-  # latex
-  texlive.combined.scheme-full
-  texstudio
+      # latex
+      texlive.combined.scheme-full
+      texstudio
 
   # git
   git
   github-desktop
-
+  
   # text editor
   vim
-    (
-    vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        ms-pyright.pyright
-        ms-python.python
-        jnoortheen.nix-ide
-        ];
-      }
-    )
+  (
+  vscode-with-extensions.override {
+    vscode = vscodium;
+    vscodeExtensions = with vscode-extensions; [
+      ms-pyright.pyright	          
+      ms-python.python
+      jnoortheen.nix-ide
+      ];
+    }
+  )
       
-  # communication
-  tdesktop
+      # communication
+      tdesktop
 
   # downloader
   axel
   wget
   
   # base
+  findutils
   plocate
   mlocate
-  findutils
-
-  # octave
-  octaveFull
-
-  # media
-  vlc
-
-  # python
-    (
-    python3.withPackages (
-      ps: with ps; [
-        ipykernel
-        ipython
-        ipywidgets
-        jupyter
-        jupyterlab
-        jupyterlab-lsp
-        jupyterlab-pygments
-        kaggle
-        keras
-        matplotlib
-        mkdocs
-        mkdocs-jupyter
-        nltk
-        numpy
-        opencv4
-        pandas
-        pydot
-        python
-        pytorch
-        scikit-learn
-        scipy
-        seaborn
-        spacy
-        spyder
-        spyder-kernels
-        tensorflow
-        tensorflow-metadata
-        tensorflow-probability
-        torch
-        torchvision
-        tqdm
-        virtualenv
-        virtualenvwrapper
-        xgboost
-        ]
-      )
-    )
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
