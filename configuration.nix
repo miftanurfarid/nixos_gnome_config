@@ -10,25 +10,6 @@
       ./hardware-configuration.nix
     ];
 
-  # git configuration
-  programs = {
-    git = {
-      enable = true;
-      lfs = {
-        enable = true;
-      };
-      config = {
-        init = {
-          defaultBranch = "main";
-        };
-        user = {
-          email="miftanurfarid@gmail.com";
-          name="miftanurfarid";
-        };
-      };
-    };
-  };
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -104,7 +85,7 @@
     description = "Mifta Nur Farid";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [   
-
+    
     ];
   };
 
@@ -116,9 +97,7 @@
   environment.systemPackages = with pkgs; [
   # browser
   firefox
-  google-chrome
-  brave
-  
+      
   # document
   xournalpp
   libreoffice
@@ -130,19 +109,18 @@
   # git
   git
   github-desktop
-  
+
   # text editor
   vim
-  (
-  vscode-with-extensions.override {
-    vscode = vscodium;
-    vscodeExtensions = with vscode-extensions; [
-      ms-pyright.pyright	          
-      ms-python.python
-      jnoortheen.nix-ide
-      ];
-    }
-  )
+    (
+    vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        ms-pyright.pyright
+        ms-python.python
+        jnoortheen.nix-ide
+        ];
+      }
+    )
       
   # communication
   tdesktop
@@ -152,9 +130,57 @@
   wget
   
   # base
-  findutils
   plocate
   mlocate
+  findutils
+
+  # octave
+  octaveFull
+
+  # media
+  vlc
+
+  # python
+    (
+    python3.withPackages (
+      ps: with ps; [
+        ipykernel
+        ipython
+        ipywidgets
+        jupyter
+        jupyterlab
+        jupyterlab-lsp
+        jupyterlab-pygments
+        kaggle
+        keras
+        matplotlib
+        mkdocs
+        mkdocs-jupyter
+        nltk
+        numpy
+        opencv4
+        pandas
+        pydot
+        python
+        pytorch
+        scikit-learn
+        scipy
+        seaborn
+        spacy
+        spyder
+        spyder-kernels
+        tensorflow
+        tensorflow-metadata
+        tensorflow-probability
+        torch
+        torchvision
+        tqdm
+        virtualenv
+        virtualenvwrapper
+        xgboost
+        ]
+      )
+    )
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -164,6 +190,26 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs = {
+    git = {
+      enable = true;
+      lfs = {
+        enable = true;
+      };
+      config = {
+        init = {
+          defaultBranch = "master";
+        };
+        user = {
+          email="miftanurfarid@gmail.com";
+          name="miftanurfarid";
+        };
+        core = {
+          filemode = false;
+        };
+      };
+    };
+  };
 
   # List services that you want to enable:
 
@@ -189,4 +235,12 @@
 
   # Locate
   services.locate.enable = true;
+
+  environment.interactiveShellInit = ''
+    parse_git_branch() {
+      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+      }
+    export PS1="\n\[\033[0;31m\][\u]\[\033[0;37m\]:\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n> "
+    gsettings set org.gnome.shell app-picker-layout "[]"
+  '';
 }
