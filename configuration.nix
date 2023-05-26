@@ -114,13 +114,15 @@
   
   # text editor
   vim
-  vscode-with-extensions.override {
-    vscodeExtensions = with vscode-extensions; [
-      ms-pyright.pyright	          
-      ms-python.python
-      jnoortheen.nix-ide
-      ];
-    }
+  (
+    vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        ms-pyright.pyright	          
+        ms-python.python
+        jnoortheen.nix-ide
+        ];
+      }
+    )
   
       
   # communication
@@ -142,43 +144,45 @@
   vlc
 
   # python
-  python3.withPackages (
-    ps: with ps; [
-      ipykernel
-      ipython
-      ipywidgets
-      jupyter
-      jupyterlab
-      jupyterlab-lsp
-      jupyterlab-pygments
-      kaggle
-      keras
-      matplotlib
-      mkdocs
-      mkdocs-jupyter
-      nltk
-      numpy
-      opencv4
-      pandas
-      pydot
-      python
-      pytorch
-      scikit-learn
-      scipy
-      seaborn
-      spacy
-      spyder
-      spyder-kernels
-      tensorflow
-      tensorflow-metadata
-      tensorflow-probability
-      torch
-      torchvision
-      tqdm
-      virtualenv
-      virtualenvwrapper
-      xgboost
-      ]
+  (
+    python3.withPackages (
+      ps: with ps; [
+        ipykernel
+        ipython
+        ipywidgets
+        jupyter
+        jupyterlab
+        jupyterlab-lsp
+        jupyterlab-pygments
+        kaggle
+        keras
+        matplotlib
+        mkdocs
+        mkdocs-jupyter
+        nltk
+        numpy
+        opencv4
+        pandas
+        pydot
+        python
+        pytorch
+        scikit-learn
+        scipy
+        seaborn
+        spacy
+        spyder
+        spyder-kernels
+        tensorflow
+        tensorflow-metadata
+        tensorflow-probability
+        torch
+        torchvision
+        tqdm
+        virtualenv
+        virtualenvwrapper
+        xgboost
+        ]
+      )
     )
   ];
 
