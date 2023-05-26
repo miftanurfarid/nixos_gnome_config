@@ -251,6 +251,9 @@
     xz
     zip
     zstd
+
+    # wine
+    wineWowPackages.waylandFull
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
