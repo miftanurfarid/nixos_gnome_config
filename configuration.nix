@@ -134,6 +134,7 @@
     brave
     transmission
     tor-browser-bundle-bin
+    zoom-us
   
     # document
     xournalpp
@@ -144,6 +145,7 @@
     calibre
     mendeley
     zotero
+    wpsoffice
       
     # latex
     texlive.combined.scheme-full
