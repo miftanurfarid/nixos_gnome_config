@@ -256,6 +256,10 @@
 
     # wine
     wineWowPackages.waylandFull
+
+    # gnome extensions
+    gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.clipboard-indicator
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
