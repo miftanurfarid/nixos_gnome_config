@@ -10,25 +10,6 @@
       ./hardware-configuration.nix
     ];
 
-  # git configuration
-  programs = {
-    git = {
-      enable = true;
-      lfs = {
-        enable = true;
-      };
-      config = {
-        init = {
-          defaultBranch = "main";
-        };
-        user = {
-          email="miftanurfarid@gmail.com";
-          name="miftanurfarid";
-        };
-      };
-    };
-  };
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -123,9 +104,9 @@
   xournalpp
   libreoffice
       
-      # latex
-      texlive.combined.scheme-full
-      texstudio
+  # latex
+  texlive.combined.scheme-full
+  texstudio
 
   # git
   git
@@ -135,7 +116,6 @@
   vim
   (
   vscode-with-extensions.override {
-    vscode = vscodium;
     vscodeExtensions = with vscode-extensions; [
       ms-pyright.pyright	          
       ms-python.python
@@ -144,8 +124,8 @@
     }
   )
       
-      # communication
-      tdesktop
+  # communication
+  tdesktop
 
   # downloader
   axel
