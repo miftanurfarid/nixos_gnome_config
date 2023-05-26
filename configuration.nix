@@ -5,9 +5,22 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  # scanner
+  hardware = {
+    sane = {
+      enable = true;
+      brscan4 = {
+        enable = true;
+      };
+      extraBackends = with pkgs; [
+        epkowa
+        utsushi
+      ];
+    };
+  };
+
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -48,6 +61,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.settings.Theme.CursorTheme = "breeze_cursors";
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -57,7 +71,26 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services = {
+    printing = {
+      enable = true;
+      stateless = true;
+      webInterface = false;
+      drivers = with pkgs; [
+        cnijfilter2 # nonfree
+        epson-escpr
+        epson-escpr2
+        foomatic-db
+        foomatic-db-ppds
+        gutenprint
+        hplip
+        splix
+      ];
+    };
+    system-config-printer = {
+      enable = true;
+    };
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
