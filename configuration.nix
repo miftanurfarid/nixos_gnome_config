@@ -128,26 +128,35 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  # browser
-  firefox
-  google-chrome
-  brave
+    # internet
+    firefox
+    google-chrome
+    brave
+    transmission
+    tor-browser-bundle-bin
   
-  # document
-  xournalpp
-  libreoffice
+    # document
+    xournalpp
+    libreoffice
+    lyx
+    qpdfview
+    libsForQt5.okular
+    calibre
+    mendeley
+    zotero
       
-  # latex
-  texlive.combined.scheme-full
-  texstudio
+    # latex
+    texlive.combined.scheme-full
+    texstudio
 
-  # git
-  git
-  github-desktop
+    # git
+    git
+    github-desktop
   
-  # text editor
-  vim
-  (
+    # text editor
+    vim
+    neovim
+    (
     vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         ms-pyright.pyright	          
@@ -157,27 +166,35 @@
       }
     )
   
-      
-  # communication
-  tdesktop
+    # graphic
+    inkscape
+    gimp
+        
+    # communication
+    tdesktop
 
-  # downloader
-  axel
-  wget
-  
-  # base
-  findutils
-  plocate
-  mlocate
+    # downloader
+    axel
+    wget
+    
+    # base
+    findutils
+    plocate
+    mlocate
+    htop
+    neofetch
+    rclone
+    pdftk
+    gparted
 
-   # octave
-  octaveFull
+    # octave
+    octaveFull
 
-  # media
-  vlc
+    # media
+    vlc
 
-  # python
-  (
+    # python
+    (
     python3.withPackages (
       ps: with ps; [
         ipykernel
@@ -217,6 +234,23 @@
         ]
       )
     )
+
+    # archiver
+    atool
+    bzip2
+    gzip
+    libarchive
+    lz4
+    lzip
+    lzo
+    lzop
+    p7zip
+    rzip
+    unrar
+    unzip
+    xz
+    zip
+    zstd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
