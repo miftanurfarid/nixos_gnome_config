@@ -188,6 +188,8 @@
     rclone
     pdftk
     gparted
+    fish
+    exa
 
     # octave
     octaveFull
@@ -233,6 +235,7 @@
         virtualenv
         virtualenvwrapper
         xgboost
+	      tensorflow-datasets
         ]
       )
     )
@@ -288,6 +291,15 @@
         };
       };
     };
+    fish = {
+      enable = true;
+      shellAliases = {
+        ls = "exa";
+        ll = "ls -l";
+        la = "ls -al";
+        du = "${pkgs.du-dust}/bin/dust";
+      };
+    };
   };
 
   # List services that you want to enable:
@@ -331,11 +343,10 @@
     };
   };
   
-  environment.interactiveShellInit = ''
-    parse_git_branch() {
-      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-      }
-    export PS1="\n\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n> "
-    gsettings set org.gnome.shell app-picker-layout "[]"
-  '';
+  environment = {
+    interactiveShellInit = ''
+      gsettings set org.gnome.shell app-picker-layout "[]"
+    '';
+  };
+  
 }
