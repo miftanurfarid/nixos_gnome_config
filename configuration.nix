@@ -113,13 +113,16 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.fafa = {
-    isNormalUser = true;
-    description = "Mifta Nur Farid";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [   
+  users = {
+    users.fafa = {
+      isNormalUser = true;
+      description = "Mifta Nur Farid";
+      extraGroups = [ "networkmanager" "wheel" ];
+      packages = with pkgs; [   
 
-    ];
+      ];
+    };
+    defaultUserShell = pkgs.fish;
   };
 
   # Allow unfree packages
@@ -161,9 +164,10 @@
     (
     vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
-        ms-pyright.pyright	          
-        ms-python.python
+        #ms-pyright.pyright	          
+        #ms-python.python
         jnoortheen.nix-ide
+        yzhang.markdown-all-in-one
         ];
       }
     )
@@ -190,6 +194,7 @@
     gparted
     fish
     exa
+    ffmpeg_5-full
 
     # octave
     octaveFull
