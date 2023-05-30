@@ -195,6 +195,7 @@
     fish
     exa
     ffmpeg_5-full
+    any-nix-shell
 
     # octave
     octaveFull
@@ -304,6 +305,9 @@
         la = "ls -al";
         du = "${pkgs.du-dust}/bin/dust";
       };
+      promptInit = ''
+        any-nix-shell fish --info-right | source
+      ''
     };
   };
 
