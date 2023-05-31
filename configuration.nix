@@ -138,7 +138,9 @@
     transmission
     tor-browser-bundle-bin
     zoom-us
-    ciscoPacketTracer8
+    ciscoPacketTracer8 pkgs.runCommand "ciscoPacketTracerPackage" {} ''
+      nix-store --add-fixed sha256 /home/fafa/Downloads/CiscoPacketTracer_820_Ubuntu_64bit.deb
+    '';
     "need run this command:
     nix-store --add-fixed sha256 CiscoPacketTracer_820_Ubuntu_64bit.deb
     before install ciscoPacketTracer8"
