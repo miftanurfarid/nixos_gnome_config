@@ -56,6 +56,9 @@
     LC_TIME = "id_ID.UTF-8";
   };
 
+  # Enable teamviewer
+  services.teamviewer.enable = true;
+  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -139,6 +142,7 @@
     tor-browser-bundle-bin
     zoom-us
     ciscoPacketTracer8
+    teamviewer
   
     # document
     xournalpp
