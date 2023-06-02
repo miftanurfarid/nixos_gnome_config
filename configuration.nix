@@ -129,7 +129,12 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+                "openssl-1.1.1u"
+              ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
