@@ -255,7 +255,6 @@
         ]
       )
     )
-
     # archiver
     atool
     bzip2
